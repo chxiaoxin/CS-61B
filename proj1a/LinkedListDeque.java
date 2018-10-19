@@ -18,20 +18,11 @@ public class LinkedListDeque<T> {
 
     public LinkedListDeque() {
         Node sentinel = new Node(0, null, null);
-        this.head = new Node(0, sentinel,null);
+        this.head = new Node(0, sentinel, null);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
         this.size = 0;
     }
-
-//    public LinkedListDeque(T item) {
-//        Node sentinel = new Node(0, null, null);
-//        this.head = new Node(0, sentinel,null);
-//        Node newNode = new Node(item, sentinel, sentinel);
-//        sentinel.next = newNode;
-//        sentinel.prev = newNode;
-//        this.size += 1;
-//    }
 
     public void addFirst(T item) {
         Node sentinel = this.head.next;
@@ -52,19 +43,20 @@ public class LinkedListDeque<T> {
     }
 
     public boolean isEmpty() {
-        return this.size() == 0 ? true: false;
+        return this.size() == 0 ? true : false;
     }
+
     public int size(){
         return this.size;
     }
 
     public T get(int index) {
-        if (this.size() <= index){
+        if (this.size() <= index) {
             return null;
         }
         int count = 0;
         Node ptr = this.head.next.next;
-        while (count < index){
+        while (count < index) {
             count += 1;
             ptr = ptr.next;
         }
@@ -87,6 +79,9 @@ public class LinkedListDeque<T> {
         }
     }
     public T removeFirst() {
+        if (isEmpty()) {
+            return null;
+        }
         Node sentinel = this.head.next;
         Node currFirst = sentinel.next;
         Node currSecond = currFirst.next;
@@ -97,6 +92,9 @@ public class LinkedListDeque<T> {
     }
 
     public T removeLast() {
+        if (isEmpty()) {
+            return null;
+        }
         Node sentinel = this.head.next;
         Node currLast = sentinel.prev;
         Node currSecond = currLast.prev;

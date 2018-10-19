@@ -52,15 +52,15 @@ public class ArrayDeque<T> {
         }
     }
 
-    public Object removeFirst() {
-        Object removedItem = elements[head];
+    public T removeFirst() {
+        T removedItem = elements[head];
         elements[head] = null;
         head = (head + 1) & (elements.length - 1);
         return removedItem;
     }
 
-    public Object removeLast() {
-        Object removedItem = elements[tail];
+    public T removeLast() {
+        T removedItem = elements[tail];
         elements[tail] = null;
         tail = (tail - 1) & (elements.length - 1);
         return removedItem;

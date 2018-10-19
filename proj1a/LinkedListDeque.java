@@ -6,7 +6,7 @@ public class LinkedListDeque<T> {
         private Node next;
         private Node prev;
 
-        public Node(T value, Node nextNode, Node prevNode){
+        public Node(T value, Node nextNode, Node prevNode) {
             this.value = value;
             this.next = nextNode;
             this.prev = prevNode;
@@ -16,7 +16,7 @@ public class LinkedListDeque<T> {
     private Node head;
     private int size;
 
-    public LinkedListDeque(){
+    public LinkedListDeque() {
         Node sentinel = new Node(0, null, null);
         this.head = new Node(0, sentinel,null);
         sentinel.next = sentinel;
@@ -33,7 +33,7 @@ public class LinkedListDeque<T> {
         this.size += 1;
     }
 
-    public void addFirst(T item){
+    public void addFirst(T item) {
         Node sentinel = this.head.next;
         Node prevFirst = sentinel.next;
         Node currFirst = new Node(item, prevFirst, sentinel);
@@ -72,17 +72,17 @@ public class LinkedListDeque<T> {
     }
 
     private T getRecurHelper(int index, Node node) {
-        if (index == 0){
+        if (index == 0) {
             return (T) node.value;
-        }else{
+        } else {
             return (T) getRecurHelper(index - 1, node.next);
         }
     }
 
     public T getRecursive(int index) {
-        if (index >= this.size()){
+        if (index >= this.size()) {
             return null;
-        }else{
+        } else {
             return (T) getRecurHelper(index, this.head.next.next);
         }
     }
@@ -109,7 +109,7 @@ public class LinkedListDeque<T> {
     public void printDeque() {
         int count = 0;
         Node ptr = this.head.next.next;
-        while (count < this.size()){
+        while (count < this.size()) {
             count += 1;
             System.out.print(ptr.value.toString() + " ");
             ptr = ptr.next;

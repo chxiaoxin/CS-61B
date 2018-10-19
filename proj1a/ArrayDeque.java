@@ -10,7 +10,7 @@ public class ArrayDeque<T> {
         elements = (T[]) new Object[CAPACITY];
     }
 
-    public void addFisrt(T item) {
+    public void addFirst(T item) {
         this.elements[head = (head - 1) & (this.elements.length - 1)] = item;
         if (head == tail) {
             resize();

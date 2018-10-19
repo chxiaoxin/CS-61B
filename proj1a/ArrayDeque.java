@@ -5,20 +5,25 @@ public class ArrayDeque<T> {
     private int tail;
     private T[] elements;
     private final int CAPACITY = 8;
+    private int size;
 
     public ArrayDeque() {
         elements = (T[]) new Object[CAPACITY];
     }
 
     public void addFirst(T item) {
-        this.elements[head = (head - 1) & (this.elements.length - 1)] = item;
+        this.elements[head] = item;
+        head = (head - 1) & (this.elements.length - 1);
+        this.size += 1;
         if (head == tail) {
             resize();
         }
     }
 
     public void addLast(T item) {
-        this.elements[tail = (tail + 1) & (this.elements.length - 1)] = item;
+        this.elements[tail] = item;
+        tail = (tail + 1) & (this.elements.length - 1);
+        this.size += 1;
         if (head == tail) {
             resize();
         }
@@ -41,7 +46,7 @@ public class ArrayDeque<T> {
     }
 
     public int size() {
-        return elements.length;
+        return this.size;
     }
 
     public void printDeque() {
@@ -53,16 +58,24 @@ public class ArrayDeque<T> {
     }
 
     public T removeFirst() {
+        if (isEmpty()) {
+            return null;
+        }
         T removedItem = elements[head];
         elements[head] = null;
         head = (head + 1) & (elements.length - 1);
+        this.size -= 1;
         return removedItem;
     }
 
     public T removeLast() {
+        if (isEmpty()) {
+            return null;
+        }
         T removedItem = elements[tail];
         elements[tail] = null;
         tail = (tail - 1) & (elements.length - 1);
+        this.size -= 1;
         return removedItem;
     }
 

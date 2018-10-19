@@ -66,7 +66,7 @@ public class ArrayDeque<T> {
         return removedItem;
     }
 
-    public Object get(int index) {
+    public T get(int index) {
         int ptr = head;
         int count = index;
         while (count > 0) {

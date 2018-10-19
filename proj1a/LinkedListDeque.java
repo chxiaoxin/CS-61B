@@ -34,12 +34,12 @@ public class LinkedListDeque<T> {
     }
 
     public void addLast(T item){
-       Node sentinel = this.head.next;
-       Node prevLast = sentinel.prev;
-       Node currLast = new Node(item, sentinel, prevLast);
-       prevLast.next = currLast;
-       sentinel.prev = currLast;
-       this.size += 1;
+        Node sentinel = this.head.next;
+        Node prevLast = sentinel.prev;
+        Node currLast = new Node(item, sentinel, prevLast);
+        prevLast.next = currLast;
+        sentinel.prev = currLast;
+        this.size += 1;
     }
 
     public boolean isEmpty() {

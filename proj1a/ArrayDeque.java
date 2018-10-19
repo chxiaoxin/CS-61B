@@ -1,4 +1,3 @@
-import java.util.Arrays;
 
 public class ArrayDeque<T> {
 
@@ -11,7 +10,7 @@ public class ArrayDeque<T> {
         elements = (T[]) new Object[CAPACITY];
     }
 
-    public void addFisrt(T item){
+    public void addFisrt(T item) {
         this.elements[head = (head - 1) & (this.elements.length - 1)] = item;
         if (head == tail) {
             resize();
@@ -38,7 +37,7 @@ public class ArrayDeque<T> {
     }
 
     public boolean isEmpty() {
-        return head == tail ? true:false;
+        return head == tail ? true : false;
     }
 
     public int size() {
@@ -46,8 +45,8 @@ public class ArrayDeque<T> {
     }
 
     public void printDeque() {
-        for(Object o: elements) {
-            if(o != null) {
+        for (Object o: elements) {
+            if (o != null) {
                 System.out.print(o.toString() + " ");
             }
         }
@@ -70,7 +69,7 @@ public class ArrayDeque<T> {
     public Object get(int index) {
         int ptr = head;
         int count = index;
-        while(count > 0) {
+        while (count > 0) {
             ptr = (ptr + 1) & (elements.length - 1);
             count -= 1;
         }

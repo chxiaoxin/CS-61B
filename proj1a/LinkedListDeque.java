@@ -1,6 +1,6 @@
 public class LinkedListDeque<T> {
 
-    public class Node<T> {
+    private class Node<T> {
 
         private T value;
         private Node next;
@@ -24,14 +24,14 @@ public class LinkedListDeque<T> {
         this.size = 0;
     }
 
-    public LinkedListDeque(T item) {
-        Node sentinel = new Node(0, null, null);
-        this.head = new Node(0, sentinel,null);
-        Node newNode = new Node(item, sentinel, sentinel);
-        sentinel.next = newNode;
-        sentinel.prev = newNode;
-        this.size += 1;
-    }
+//    public LinkedListDeque(T item) {
+//        Node sentinel = new Node(0, null, null);
+//        this.head = new Node(0, sentinel,null);
+//        Node newNode = new Node(item, sentinel, sentinel);
+//        sentinel.next = newNode;
+//        sentinel.prev = newNode;
+//        this.size += 1;
+//    }
 
     public void addFirst(T item) {
         Node sentinel = this.head.next;
@@ -115,5 +115,4 @@ public class LinkedListDeque<T> {
             ptr = ptr.next;
         }
     }
-
 }

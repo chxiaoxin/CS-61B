@@ -12,8 +12,7 @@ public class ArrayDeque<T> {
     }
 
     public void addFirst(T item) {
-        this.elements[head] = item;
-        head = (head - 1) & (this.elements.length - 1);
+        this.elements[head = (head - 1) & (this.elements.length - 1)] = item;
         this.size += 1;
         if (head == tail) {
             resize();
@@ -63,7 +62,7 @@ public class ArrayDeque<T> {
         }
         T removedItem = elements[head];
         elements[head] = null;
-        head = (head + 1) & (elements.length - 1);
+        head = (head + 1) & (this.elements.length - 1);
         this.size -= 1;
         return removedItem;
     }
@@ -72,9 +71,10 @@ public class ArrayDeque<T> {
         if (isEmpty()) {
             return null;
         }
-        T removedItem = elements[tail];
-        elements[tail] = null;
-        tail = (tail - 1) & (elements.length - 1);
+        int realTail = (tail - 1) & (elements.length - 1);
+        T removedItem = elements[realTail];
+        elements[realTail] = null;
+        tail = realTail;
         this.size -= 1;
         return removedItem;
     }

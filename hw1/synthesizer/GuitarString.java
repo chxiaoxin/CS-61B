@@ -31,7 +31,8 @@ public class GuitarString {
         //       double r = Math.random() - 0.5;
         //       Make sure that your random numbers are different from each other.
         HashSet<Double> set = new HashSet<>();
-        for (int i = 0; i < buffer.capacity(); i++){
+        
+        for (double e: ) {
             double number = Math.random() - 0.5;
             while (set.contains(number)){
                 number = Math.random() - 0.5;

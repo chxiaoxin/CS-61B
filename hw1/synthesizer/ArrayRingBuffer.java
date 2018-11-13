@@ -1,11 +1,8 @@
-// TODO: Make sure to make this class a part of the synthesizer package
- package synthesizer;
+package synthesizer;
 import java.io.IOException;
 import java.util.Iterator;
 
-//TODO: Make sure to make this class and all of its methods public
-//TODO: Make sure to make this class extend AbstractBoundedQueue<t>
-public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable<T> {
+public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable {
     /* Index for the next dequeue or peek. */
     private int first;            // index for the next dequeue or peek
     /* Index for the next enqueue. */
@@ -26,11 +23,11 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
         this.first = 0;
         this.last = 0;
         if (capacity > 8) {
-            capacity|= capacity >>> 1;
-            capacity|= capacity >>> 2;
-            capacity|= capacity >>> 4;
-            capacity|= capacity >>> 8;
-            capacity|= capacity >>> 16;
+            capacity |= capacity >>> 1;
+            capacity |= capacity >>> 2;
+            capacity |= capacity >>> 4;
+            capacity |= capacity >>> 8;
+            capacity |= capacity >>> 16;
         } else {
             capacity = 3;
         }
@@ -55,7 +52,6 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
      * covered Monday.
      */
     public void enqueue(Object x) {
-        // TODO: Enqueue the item. Don't forget to increase fillCount and update last.
         if (isFull()){
             try {
                 throw new IOException("already Full");
@@ -74,11 +70,10 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
      * covered Monday.
      */
     public T dequeue() {
-        // TODO: Dequeue the first item. Don't forget to decrease fillCount and update
         if (isEmpty()){
             try {
-                throw new IOException("already empty");
-            } catch (IOException e) {
+                throw new RuntimeException("already empty");
+            } catch (RuntimeException e) {
                 e.printStackTrace();
             }
         }
@@ -93,11 +88,10 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
      * Return oldest item, but don't remove it.
      */
     public T peek() {
-        // TODO: Return the first item. None of your instance variables should change.
-        if (isEmpty()){
+        if (isEmpty()) {
             try {
-                throw new IOException("already empty");
-            } catch (IOException e) {
+                throw new RuntimeException("already empty");
+            } catch (RuntimeException e) {
                 e.printStackTrace();
             }
         }
@@ -106,14 +100,24 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
 
     private class bufferIterator implements Iterator<T> {
 
+        private int ptr;
+
+        public bufferIterator() {
+            ptr = first;
+        }
+
+        public T peek(int ptr) {
+            return rb[ptr++];
+        }
+
         @Override
         public boolean hasNext() {
-            return (first == last) ? false:true;
+            return (ptr == last) ? false:true;
         }
 
         @Override
         public T next() {
-            return peek();
+            return peek(ptr);
         }
     }
 

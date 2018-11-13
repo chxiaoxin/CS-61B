@@ -1,0 +1,8 @@
+Searching for explanation.txt in /autograder/submission/lab2/
+
+* You must include a file called explanation.txt that explains why your submission is late.
+Please put the file at the top level of your assignment directory, e.g., proj1a/explanation.txt.
+* It doesn't need to be a detailed explanation, and won't be read anytime soon. If you have
+issues you'd like to discuss with the staff, please email the staff directly.
+* We may use this file in order to find ways to improve the course experience for future students.
+* Your final score will be zero until you do this.

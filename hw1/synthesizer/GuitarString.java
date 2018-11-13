@@ -1,5 +1,7 @@
 // TODO: Make sure to make this class a part of the synthesizer package
-//package <package name>;
+package synthesizer;
+
+import java.util.HashSet;
 
 //Make sure this class is public
 public class GuitarString {
@@ -18,6 +20,7 @@ public class GuitarString {
         //       cast the result of this divsion operation into an int. For better
         //       accuracy, use the Math.round() function before casting.
         //       Your buffer should be initially filled with zeros.
+        buffer = new ArrayRingBuffer<Double>((int) (SR/frequency));
     }
 
 
@@ -26,8 +29,16 @@ public class GuitarString {
         // TODO: Dequeue everything in the buffer, and replace it with random numbers
         //       between -0.5 and 0.5. You can get such a number by using:
         //       double r = Math.random() - 0.5;
-        //
         //       Make sure that your random numbers are different from each other.
+        HashSet<Double> set = new HashSet<>();
+        for (int i = 0; i < buffer.capacity(); i++){
+            double number = Math.random() - 0.5;
+            while (set.contains(number)){
+                number = Math.random() - 0.5;
+            }
+            set.add(number);
+            buffer.enqueue(number);
+        }
     }
 
     /* Advance the simulation one time step by performing one iteration of
@@ -37,11 +48,13 @@ public class GuitarString {
         // TODO: Dequeue the front sample and enqueue a new sample that is
         //       the average of the two multiplied by the DECAY factor.
         //       Do not call StdAudio.play().
+        double average = DECAY * (buffer.dequeue() + buffer.peek()) * 0.5;
+        buffer.enqueue(average);
     }
 
     /* Return the double at the front of the buffer. */
     public double sample() {
         // TODO: Return the correct thing.
-        return 0;
+        return buffer.peek();
     }
 }

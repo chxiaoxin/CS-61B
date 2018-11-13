@@ -10,6 +10,6 @@ public interface BoundedQueue<T> {
         return fillCount() == 0 ? true : false ;
     }
     default boolean isFull() {
-        return fillCount()==capacity() ? true : false ;
+        return fillCount() ==   capacity() ? true : false ;
     }
 }

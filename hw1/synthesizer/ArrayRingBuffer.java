@@ -2,7 +2,7 @@ package synthesizer;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable {
+public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Iterable {
     /* Index for the next dequeue or peek. */
     private int first;            // index for the next dequeue or peek
     /* Index for the next enqueue. */
@@ -15,7 +15,6 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
      * Create a new ArrayRingBuffer with the given capacity.
      */
     public ArrayRingBuffer(int capacity) {
-        // TODO: Create new array with capacity elements.
         //       first, last, and fillCount should all be set to 0.
         //       this.capacity should be set appropriately. Note that the local variable
         //       here shadows the field we inherit from AbstractBoundedQueue, so
@@ -51,7 +50,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
      * throw new RuntimeException("Ring buffer overflow"). Exceptions
      * covered Monday.
      */
-    public void enqueue(Object x) {
+    public void enqueue(T x) {
         if (isFull()) {
             try {
                 throw new IOException("already Full");
@@ -98,11 +97,11 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
         return rb[first];
     }
 
-    private class bufferIterator implements Iterator {
+    private class BufferIterator implements Iterator {
 
         private int ptr;
 
-        public bufferIterator() {
+        public BufferIterator() {
             ptr = first;
         }
 
@@ -122,7 +121,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
     }
 
     public Iterator iterator() {
-        return new bufferIterator();
+        return new BufferIterator();
     }
 
 }

@@ -18,7 +18,7 @@ public class GuitarString {
         //       cast the result of this divsion operation into an int. For better
         //       accuracy, use the Math.round() function before casting.
         //       Your buffer should be initially filled with zeros.
-        buffer = new ArrayRingBuffer<Double> ((int) (SR / frequency));
+        buffer = new ArrayRingBuffer <Double> ( (int) (SR / frequency));
     }
 
     /* Pluck the guitar string by replacing the buffer with white noise. */
@@ -29,7 +29,7 @@ public class GuitarString {
         HashSet<Double> set = new HashSet<>();
         for (int i = 0; i< buffer.capacity(); i++) {
             double number = Math.random() - 0.5;
-            while (set.contains(number)){
+            while (set.contains(number)) {
                 number = Math.random() - 0.5;
             }
             set.add(number);

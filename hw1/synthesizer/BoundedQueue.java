@@ -7,9 +7,9 @@ public interface BoundedQueue<T> {
     T dequeue();
     T peek();
     default boolean isEmpty() {
-        return fillCount() == 0 ? true : false ;
+        return fillCount() == 0 ? true : false;
     }
     default boolean isFull() {
-        return fillCount() ==   capacity() ? true : false ;
+        return fillCount() ==   capacity() ? true : false;
     }
 }

@@ -2,7 +2,7 @@ package synthesizer;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Iterable {
+public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Iterable<T> {
     /* Index for the next dequeue or peek. */
     private int first;            // index for the next dequeue or peek
     /* Index for the next enqueue. */
@@ -97,7 +97,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
         return rb[first];
     }
 
-    private class BufferIterator implements Iterator {
+    private class BufferIterator implements Iterator<T> {
 
         private int ptr;
 
@@ -111,7 +111,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> implements Itera
 
         @Override
         public boolean hasNext() {
-            return (ptr == last) ? false:true;
+            return (ptr == last) ? false : true;
         }
 
         @Override

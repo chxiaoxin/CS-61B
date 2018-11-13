@@ -6,6 +6,10 @@ public interface BoundedQueue<T> {
     void enqueue(T x);
     T dequeue();
     T peek();
-    default boolean isEmpty() {return fillCount() == 0 ? true:false;}
-    default boolean isFull() {return fillCount()==capacity()? true:false;}
+    default boolean isEmpty() {
+        return fillCount() == 0 ? true : false ;
+    }
+    default boolean isFull() {
+        return fillCount()==capacity() ? true : false ;
+    }
 }

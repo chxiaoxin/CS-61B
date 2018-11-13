@@ -52,7 +52,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
      * covered Monday.
      */
     public void enqueue(Object x) {
-        if (isFull()){
+        if (isFull()) {
             try {
                 throw new IOException("already Full");
             } catch (IOException e) {
@@ -70,7 +70,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
      * covered Monday.
      */
     public T dequeue() {
-        if (isEmpty()){
+        if (isEmpty()) {
             try {
                 throw new RuntimeException("already empty");
             } catch (RuntimeException e) {
@@ -79,7 +79,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
         }
         T result = rb[this.first];
         rb[this.first] = null;
-        this.first = (this.first + 1) & (this.capacity -1);
+        this.first = (this.first + 1) & (this.capacity - 1);
         this.fillCount -= 1;
         return result;
     }
@@ -98,7 +98,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue implements Iterable
         return rb[first];
     }
 
-    private class bufferIterator implements Iterator<T> {
+    private class bufferIterator implements Iterator {
 
         private int ptr;
 

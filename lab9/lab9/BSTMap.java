@@ -50,11 +50,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      *  or null if this map contains no mapping for the key.
      */
     private V getHelper(K key, Node p) {
-        if(p == null) {
+        if (p == null) {
             return null;
-        } else if(key.compareTo(p.key) == 0) {
+        } else if (key.compareTo(p.key) == 0) {
             return p.value;
-        } else if(key.compareTo(p.key) > 0) {
+        } else if (key.compareTo(p.key) > 0) {
             return getHelper(key, p.right);
         } else {
             return getHelper(key, p.left);
@@ -73,7 +73,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
       * Or if p is null, it returns a one node BSTMap containing (KEY, VALUE).
      */
     private Node putHelper(K key, V value, Node p) {
-        if(p == null) {
+        if (p == null) {
             return new Node(key, value);
         } else if (key.compareTo(p.key) > 0) {
             p.right = putHelper(key, value, p.right);
@@ -108,7 +108,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
 
     /* Returns a Set view of the keys contained in this map. */
     private void getSetHelper(Node root, Set<K> hashset) {
-        if(root != null) {
+        if (root != null) {
             hashset.add(root.key);
             getSetHelper(root.left, hashset);
             getSetHelper(root.right, hashset);
@@ -126,21 +126,31 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      *  null on failed removal.
      */
     private Node elevate(Node node) {
-        if(node.left != null && node.right != null) {
-            node.left.right = node.right;
+        if (node.left != null && node.right != null) {
+            Node newRoot = node.left;
+            while (newRoot != null && newRoot.right != null) {
+                newRoot = newRoot.right;
+            }
+            Node targetNode = new Node(newRoot.right.key, newRoot.right.value);
+            newRoot.right = removeHelper(targetNode.key, targetNode);
+            targetNode.left = node.left;
+            targetNode.right = node.right;
+            return targetNode;
+        } else if (node.left != null) {
             return node.left;
-        } else if(node.left != null) {
-            return node.left;
-        } else {
+        } else if (node.right != null) {
+            return node.right;
+        }
+        else {
             return null;
         }
     }
 
     private Node removeHelper(K key, Node root) {
-        if(key.compareTo(root.key) == 0) {
+        if (key.compareTo(root.key) == 0) {
             deleted = root;
             return elevate(root);
-        } else if(key.compareTo(root.key) > 0) {
+        } else if (key.compareTo(root.key) > 0) {
             root.right = removeHelper(key, root.right);
             return root;
         } else {
@@ -161,10 +171,10 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      *  null on failed removal.
      **/
     private Node removeHelper(K key, Node root, V value) {
-        if(key.compareTo(root.key) == 0 && value == root.value) {
+        if (key.compareTo(root.key) == 0 && value == root.value) {
             deleted = root;
             return elevate(root);
-        } else if(key.compareTo(root.key) > 0) {
+        } else if (key.compareTo(root.key) > 0) {
             root.right = removeHelper(key, root.right);
             return root;
         } else {

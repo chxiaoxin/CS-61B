@@ -55,8 +55,8 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     public V get(K key) {
         int index = hash(key);
         ArrayMap<K, V> bucket = buckets[index];
-        for(K bucketKey: bucket.keySet()) {
-            if(bucketKey.equals(key)) {
+        for( K bucketKey: bucket.keySet()) {
+            if (bucketKey.equals(key)) {
                 return bucket.get(bucketKey);
             }
         }
@@ -74,7 +74,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     @Override
     public int size() {
         int totalSize = 0;
-        for(ArrayMap bucket: buckets) {
+        for (ArrayMap bucket: buckets) {
             totalSize += bucket.size;
         }
         return totalSize;
@@ -86,7 +86,7 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
     @Override
     public Set<K> keySet() {
         HashSet<K> hashSet = new HashSet<>();
-        for(ArrayMap bucket: buckets) {
+        for (ArrayMap bucket: buckets) {
             hashSet.addAll(bucket.keySet());
         }
         return hashSet;

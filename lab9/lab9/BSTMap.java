@@ -128,11 +128,11 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
     private Node elevate(Node node) {
         if (node.left != null && node.right != null) {
             Node newRoot = node.left;
-            while (newRoot != null && newRoot.right != null) {
+            while (newRoot.right != null) {
                 newRoot = newRoot.right;
             }
+            node.left = removeHelper(newRoot.key, node.left);
             Node targetNode = new Node(newRoot.right.key, newRoot.right.value);
-            newRoot.right = removeHelper(targetNode.key, targetNode);
             targetNode.left = node.left;
             targetNode.right = node.right;
             return targetNode;

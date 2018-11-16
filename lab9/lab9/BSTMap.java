@@ -132,7 +132,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
                 newRoot = newRoot.right;
             }
             node.left = removeHelper(newRoot.key, node.left);
-            Node targetNode = new Node(newRoot.right.key, newRoot.right.value);
+            Node targetNode = new Node(newRoot.key, newRoot.value);
             targetNode.left = node.left;
             targetNode.right = node.right;
             return targetNode;
